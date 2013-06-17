@@ -4,10 +4,16 @@ describe "User pages" do
 
   subject { page }
 
-  describe "signup page" do
-    before { visit signup_path }
+  shared_examples_for "static pages" do
+    it { should have_selector('h1',     text: heading)}
+    it { should have_selector('title',  text: full_title(page_title))}
+  end
 
-    it { should have_selector('h1',    text: 'Sign up') }
-    it { should have_selector('title', text: "Here is | Sign up") }
+  describe "signup page" do
+    before {visit signup_path}    
+    let(:heading)  {'Sign up'}
+    let(:page_title){"Sign up"}
+    it_should_behave_like "static pages"
+    
   end
 end
