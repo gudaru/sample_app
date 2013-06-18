@@ -21,4 +21,9 @@ class User < ActiveRecord::Base
   					uniqueness: {case_sensitive: false}
   validates :password,  presence: true, length: {minimum: 6}
   validates :password_confirmation, presence: true
+
+  # Hidden or appear error messages
+  after_validation {self.errors.messages.delete(:password_digest)}
+  after_validation {self.errors.messages.delete(:password)}
+  after_validation {self.errors.messages.delete(:email)}
 end
